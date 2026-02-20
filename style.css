@@ -39,12 +39,12 @@ main {
   display: flex;
 }
 main--toggle-width {
-  width: min(90rem, 100%);
+  width: clamp(20rem, 92vw, 90rem);
 }
 
 /* header */
 header {
-  width: min(90rem, 100%);
+  width: clamp(20rem, 92vw, 90rem);
   min-height: 30rem;
   display: flex;
   color: white;
@@ -204,17 +204,33 @@ header::before {
   color: #f7f7fb;
 }
 
+.note {
+  position: relative;
+}
 .note--title, .note__date, .note__textarea,
+.note .note__close,
 .note .bnyu,
 .note .button-wrapper {
   display: none;
 }
+.note.note--open .note__close,
 .note.note--open .note--title,
 .note.note--open .note__date,
 .note.note--open .note__textarea,
 .note.note--open .button-wrapper,
 .note.note--open .bnyu {
   display: block;
+}
+.note__close {
+  position: absolute;
+  top: 0;
+  right: 0.1rem;
+  animation: all 3s ease-in-out;
+}
+.note__close:hover {
+  cursor: pointer;
+  color: rgba(180, 35, 55, 0.78);
+  transform: scale(1.2);
 }
 .note.note--open .button-wrapper {
   display: flex;

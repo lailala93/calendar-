@@ -1,6 +1,12 @@
 export function selectCell() {
   let rows = document.querySelector(".rows");
   const note = document.getElementById("note");
+  const closeBtn = document.getElementById("note__close");
+
+  closeBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    note.classList.remove("note--open");
+  });
 
   // Open when clicking a cell
   rows.addEventListener("click", (e) => {
@@ -13,6 +19,7 @@ export function selectCell() {
 document.addEventListener("click", (e) => {
   const clickedInsideNote = note.contains(e.target);
   const clickedCell = e.target.closest(".cell");
+
   if (!clickedInsideNote && !clickedCell) {
     note.classList.remove("note--open");
   }
