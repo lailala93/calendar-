@@ -7,7 +7,7 @@ $red: rgba(180, 35, 55, 0.78);
 $orange: rgba(214, 118, 0, 0.78);
 $black: #222;
 $white: #f7f7fb;
-$width-screen: min(90rem, 100%);
+$width-screen: clamp(20rem, 92vw, 90rem);
 *,
 *::before,
 *::after {
@@ -222,15 +222,18 @@ header {
   }
 }
 .note {
+  position: relative;
   //hidden on load
   &--title,
   &__date,
   &__textarea,
+  .note__close,
   .bnyu,
   .button-wrapper {
     display: none;
   }
   &.note--open {
+    .note__close,
     .note--title,
     .note__date,
     .note__textarea,
@@ -239,11 +242,21 @@ header {
       display: block;
     }
   }
+  &__close {
+    position: absolute;
+    top: 0;
+    right: 0.1rem;
+    animation: all 3s ease-in-out;
 
+    &:hover {
+      cursor: pointer;
+      color: $red;
+      transform: scale(1.2);
+    }
+  }
   &.note--open .button-wrapper {
     display: flex;
   }
-
   display: flex;
   flex-direction: column;
   align-items: center;
