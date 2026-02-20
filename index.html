@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Calendar</title>
+  </head>
+  <body>
+    <header>
+      <div class="prev" id="prevBtn">&lArr; Previous</div>
+
+      <div class="current">
+        <span class="month" id="month">Current Month</span>
+        <span class="year" id="year">Current year</span>
+      </div>
+
+      <div class="next" id="nextBtn">Next &rArr;</div>
+    </header>
+    <main>
+      <!-- Calendar -->
+      <div class="calendar">
+        <div class="weekdays" id="week"></div>
+        <div class="rows" id="rows"></div>
+      </div>
+      <!-- JS note -->
+      <div id="note" class="note">
+        <h2 class="note--title" id="note--title">Agenda</h2>
+        <p class="note__date" id="noteDate"></p>
+        <textarea
+          class="note__textarea"
+          id="noteTextarea"
+          placeholder="Insert notes"
+        ></textarea>
+        <div class="button-wrapper">
+          <button type="button" id="saveNote">Save</button>
+          <button type="button" id="editNote">Edit</button>
+          <button type="button" id="dltNote">Delete</button>
+        </div>
+        <span class="bnyu">
+          <img src="transparant-bunny.18f91144.png" alt="" />
+        </span>
+      </div>
+    </main>
+    <script type="module" src="/src/app.js"></script>
+  </body>
+</html>
