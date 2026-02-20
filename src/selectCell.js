@@ -26,5 +26,24 @@ document.addEventListener("click", (e) => {
 });
 
 // TODO
-const textarea = document.getElementById("noteTextarea"); //for cookies later
+//for cookies later
 // to do: const noteDate = document.getElementById("noteDate");
+
+function makeNote() {
+  const textarea = document.getElementById("noteTextarea").value;
+  const saveNote = document.getElementById("saveNote");
+  const editNote = document.getElementById("seditNotee");
+  const dltNote = document.getElementById("dltNote");
+  // Save to agenda container (on left will show highlights)
+  const agenda = document.getElementById("agenda");
+
+  saveNote.addEventListener("click", (e) => {
+    agenda.innerHTML = "";
+
+    if (textarea !== "") {
+      agenda.innerText = textarea;
+    }
+  });
+}
+
+makeNote();
