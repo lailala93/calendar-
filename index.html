@@ -18,33 +18,59 @@
       <div class="next" id="nextBtn">Next &rArr;</div>
     </header>
     <main>
+      <!-- Agenda items -->
+      <div class="agenda" id="agenda">
+        <h2 class="title-style">This is agenda</h2>
+        <p>Date of agenda items</p>
+        <p class="note__date currentDate"></p>
+        <ul id="agenda__list"></ul>
+        <div class="button-wrapper">
+          <button type="button" class="button-wrapper--edit" id="editNote">
+            Edit
+          </button>
+          <button
+            type="button"
+            button__wrapper--edit
+            class="button-wrapper--dlt"
+            id="dltNote"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+      <!-- end agenda -->
+
       <!-- Calendar -->
       <div class="calendar">
         <div class="weekdays" id="week"></div>
         <div class="rows" id="rows"></div>
       </div>
-      <!-- JS note -->
+      <!-- end calendar | start js NOTE -->
+
+      <!-- NOTES -->
       <div id="note" class="note">
         <span class="note__close" id="note__close">&#10006;</span>
-        <h2 class="note--title" id="note--title">Agenda</h2>
-        <p class="note__date" id="noteDate"></p>
+        <h2 class="title-style" id="note--title">Notes:</h2>
+
+        <p>You are editing:</p>
+        <p class="currentDate"></p>
+
+        <span class="bnyu">
+          <img src="transparant-bunny.18f91144.png" alt="" />
+        </span>
         <textarea
           class="note__textarea"
           id="noteTextarea"
           placeholder="Insert notes"
         ></textarea>
+
         <div class="button-wrapper">
-          <button type="button" id="saveNote">Save</button>
-          <button type="button" id="editNote">Edit</button>
-          <button type="button" id="dltNote">Delete</button>
+          <button type="button" class="button-wrapper--save" id="saveNote">
+            Save
+          </button>
         </div>
-        <span class="bnyu">
-          <img src="transparant-bunny.18f91144.png" alt="" />
-        </span>
       </div>
-      <div class="agenda" id="agenda">
-        <ul id="agenda__list"></ul>
-      </div>
+      <!-- END notes -->
     </main>
     <script type="module" src="/src/app.js"></script>
   </body>

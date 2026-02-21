@@ -21,6 +21,19 @@ window.addEventListener("load", () => {
   let viewYear = d.getFullYear();
   let viewMonth = d.getMonth();
 
+  var selectedKey = `${viewYear}-${viewMonth + 1}-${d.getDate()}`;
+
+  // selectCell((newKey) => {
+  //   selectedKey = newKey;
+  //   showNotes(selectedKey);
+  // });
+
+  const showDate = () => {
+    document.querySelectorAll(".currentDate").forEach((el) => {
+      el.innerText = selectedKey; // IF its onload -->  selectedKey ELSE IF on select CHANGE the date according to  cell;
+    });
+  };
+
   year.innerText = viewYear;
   month.innerText = d.toLocaleDateString("en-US", { month: "long" });
 
@@ -86,19 +99,30 @@ window.addEventListener("load", () => {
     firstDay -= 1; // to start on monday not sunday
 
     if (firstDay == -1) firstDay = 6;
+
+    // prev month info
     let prevYear = yearNum;
     let prevMonth = monthIndex - 1;
+
     if (prevMonth == -1) {
-      prevMonth == 11;
+      prevMonth = 11;
       prevYear--;
     }
     let daysPrevMonth = daysInMonth(prevMonth, prevYear);
     let prevMonthStart = daysPrevMonth - firstDay + 1;
-    console.log(prevMonthStart);
-    let nextMonthstart = 1;
 
+    // next month info
+    let nextYear = yearNum;
+    let nextMonth = monthIndex + 1;
+
+    if (nextMonth === 12) {
+      prevMonth = 0;
+      prevYear++;
+    }
+
+    let nextMonthstart = 1;
     let numRows = Math.ceil((daysMonths + firstDay) / 7);
-    let beforeCounter = 1;
+    let beforeCounter = 0; // was 1
 
     for (let i = 0; i < numRows; i++) {
       const row = document.createElement("div");
@@ -108,43 +132,61 @@ window.addEventListener("load", () => {
         const cell = document.createElement("div");
         cell.classList.add("cell");
 
+        // PREV MONTH (muted cells)
         if (beforeCounter <= firstDay) {
           cell.classList.add("cell--muted");
-          // if 'celmuted' fill in prev month data
           cell.textContent = prevMonthStart;
+
+          // ~For Localstorage~
+          cell.dataset.year = prevYear;
+          cell.dataset.month = prevMonth;
+          cell.dataset.day = prevMonthStart;
+
           prevMonthStart++;
-          // cell.classList.add("cell--empty");
           beforeCounter++;
-        } else {
-          if (counter <= daysMonths) {
-            cell.textContent = counter;
+          // NEXT MONTH (muted cells)
+        } else if (counter <= daysMonths) {
+          cell.textContent = counter;
 
-            if (isToday(yearNum, monthIndex, counter)) {
-              cell.classList.add("day--today");
-            }
+          // ~For Localstorage~
+          cell.dataset.year = yearNum;
+          cell.dataset.month = monthIndex;
+          cell.dataset.day = counter;
 
-            counter++;
-          } else {
-            cell.textContent = nextMonthstart;
-            cell.classList.add("cell--muted");
-            nextMonthstart++;
+          if (isToday(yearNum, monthIndex, counter)) {
+            cell.classList.add("cell--today");
           }
+
+          counter++;
+          // NEXT MONTH (MUTED)
+        } else {
+          cell.classList.add("cell--muted");
+          cell.textContent = nextMonthstart;
+
+          cell.dataset.year = nextYear;
+          cell.dataset.month = nextMonth;
+          cell.dataset.day = nextMonthstart;
+
+          nextMonthstart++;
         }
         row.appendChild(cell);
       }
-
       rows.appendChild(row);
     }
   }
 
   function renderCalendar(monthIndex, yearNum) {
     rows.innerHTML = "";
+
     month.textContent = new Date(yearNum, monthIndex).toLocaleDateString(
       "en-US",
       { month: "long" },
     );
     year.textContent = yearNum;
+
+    showDate(); // run onload
     dayOfWeek();
+    // showNotes();
     renderCell(monthIndex, yearNum);
   }
 

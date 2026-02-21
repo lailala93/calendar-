@@ -1,13 +1,14 @@
 // npm run watch
 $blue: rgba(0, 54, 162, 0.5);
 $green: rgba(0, 54, 24, 0.8);
-$ligt-green: rgba(0, 98, 64, 0.75);
+$light-green: rgba(0, 98, 64, 0.75);
 $light-blue: rgba(0, 86, 190, 0.75);
 $red: rgba(180, 35, 55, 0.78);
 $orange: rgba(214, 118, 0, 0.78);
 $black: #222;
 $white: #f7f7fb;
-$width-screen: clamp(20rem, 92vw, 90rem);
+$bg-note: rgba(236, 236, 236, 0.5);
+$width-screen: clamp(20rem, 92vw, 120rem);
 *,
 *::before,
 *::after {
@@ -29,14 +30,6 @@ body {
     Arial,
     sans-serif;
   font-size: 1.6rem;
-  min-width: 100vw;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  place-content: center;
-  padding: 2rem;
   background: rgba(black, 0.9);
 
   &::after {
@@ -54,17 +47,22 @@ body {
   }
 }
 main {
-  display: flex;
-  // width: $width-screen;
+  max-height: 100vh;
 
-  &--toggle-width {
-    width: $width-screen;
-  }
+  display: grid;
+  width: $width-screen;
+  grid-template-columns: 1fr 3fr 1fr;
+  justify-content: center;
+  align-items: center;
+  place-content: center;
+  gap: 1rem;
+  margin: 0 auto;
 }
 /* header */
 header {
+  margin: 0 auto;
   width: $width-screen;
-  min-height: 30rem;
+  min-height: 25rem;
   display: flex;
   color: white;
   background: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FsZW5kYXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60")
@@ -134,8 +132,26 @@ header {
   font-size: 2rem;
   text-align: center;
 }
+// END HEADER
+// Start agenda
+.agenda {
+  border-radius: 0.2rem;
+  background-color: $bg-note;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 
-/* calendar shell */
+  // the ul
+  &__list {
+    text-decoration: none;
+    background-color: white;
+  }
+}
+// end agenda
+
+/* START calendar  */
 .calendar {
   width: 100%; //$width-screen;
   display: grid;
@@ -143,7 +159,7 @@ header {
 
   width: 100%;
   background: rgba(255, 255, 255, 0.5);
-  border-radius: 1.6rem;
+  border-radius: 0.2rem;
   box-shadow: 0 1.2rem 3rem rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
@@ -209,7 +225,7 @@ header {
   &--muted {
     opacity: 0.5;
   }
-  &----today {
+  &--today {
     outline: 0.2rem solid $blue;
     color: $white;
     background: linear-gradient(135deg, $blue 0%, $green 100%);
@@ -220,28 +236,32 @@ header {
     background: $black;
     color: $white;
   }
-}
-.note {
-  position: relative;
-  //hidden on load
-  &--title,
-  &__date,
-  &__textarea,
-  .note__close,
-  .bnyu,
-  .button-wrapper {
-    display: none;
-  }
-  &.note--open {
-    .note__close,
-    .note--title,
-    .note__date,
-    .note__textarea,
-    .button-wrapper,
-    .bnyu {
-      display: block;
+  &--active {
+    outline: 0.2rem solid $orange;
+    color: white;
+    background: linear-gradient(135deg, $orange 0%, $red 100%);
+    outline-offset: 0.2rem;
+    font-weight: 700;
+
+    &:hover {
+      background-color: $red;
     }
   }
+}
+// END CALENDAR
+
+// START note (third)
+.note {
+  display: flex;
+  position: relative;
+  background-color: $bg-note;
+  height: 100%;
+  border-radius: 0.2rem;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
   &__close {
     position: absolute;
     top: 0;
@@ -254,40 +274,9 @@ header {
       transform: scale(1.2);
     }
   }
-  &.note--open .button-wrapper {
-    display: flex;
-  }
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: lightyellow;
-  height: fit-content;
-  padding: 0;
-  padding-bottom: 1rem;
 
-  &--title {
-    height: 51.3px;
-    padding-top: 1.3rem;
-    font-size: 1.6rem;
-    text-align: center;
-    font-weight: 600;
-
-    background: linear-gradient(to right, $blue 0%, $green 100%);
-    background-clip: text;
-    color: transparent;
-    background-size: 200% auto;
-    animation: shine 3s linear infinite;
-  }
-  @keyframes shine {
-    0% {
-      background-position: 200% 50%;
-    }
-    100% {
-      background-position: 50% 0%;
-    }
-  }
   &__textarea {
-    display: none;
+    display: flex;
     width: 90%;
     height: min(20rem, 50vh);
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -304,15 +293,56 @@ header {
     }
   }
 }
+
+.bnyu {
+  margin-bottom: 5rem;
+  img {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, $blue 0%, $green 100%);
+    background-size: 200% auto;
+    animation: shine 5s linear infinite;
+  }
+}
+//UNIVERSAL styles
+// Title animation
+.title-style {
+  height: 51.3px;
+  padding-top: 1.3rem;
+  font-size: 1.6rem;
+  text-align: center;
+  font-weight: 600;
+
+  background: linear-gradient(to right, $blue 0%, $green 100%);
+  background-clip: text;
+  color: transparent;
+  background-size: 200% auto;
+  animation: shine 3s linear ease-in-out infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 200% 50%;
+  }
+  100% {
+    background-position: 50% 0%;
+  }
+}
+
+// For Agenda + Notes
 .button-wrapper {
   display: flex;
-
   gap: 0.2rem;
   margin-top: 1rem;
 
   button {
-    padding: 0.5rem 1rem;
     border-radius: 0.8rem;
+    padding: 0.5rem 1rem;
     font-weight: 400;
     color: white;
     border: none;
@@ -324,24 +354,26 @@ header {
       opacity: 0.9;
       transform: scale(1.1);
     }
-    &:nth-child(1) {
-      background: $light-blue;
-    }
-    &:nth-child(2) {
-      background: $ligt-green;
-    }
-    &:nth-child(3) {
-      background: $red;
-    }
+  }
+  &--save {
+    background: $light-blue;
+  }
+  &--edit {
+    background: $light-green;
+  }
+  &--dlt {
+    background: $red;
   }
 }
 
-.bnyu {
-  padding-top: 1rem;
-  img {
-    width: 2.2rem;
-    height: 2rem;
-    object-fit: cover;
-    background-color: pink;
-  }
+.currentDate {
+  background-color: white;
+  padding: 0.4rem 0.5rem;
+  text-align: center;
+
+  outline: 0.2rem solid $orange;
+  color: white;
+  background: linear-gradient(135deg, $orange 0%, $red 100%);
+  outline-offset: 0.2rem;
+  font-weight: 700;
 }
