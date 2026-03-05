@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "watch":  "sass --watch style.scss:style.css"
+    "watch": "sass --load-path=styles styles/style.scss css/build/style.css -w"
   },
   "dependencies": {
     "sass": "^1.97.3"

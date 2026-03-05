@@ -1,4 +1,22 @@
 // npm run watch (start Scss)
+
+split files:
+
+src/
+  index.js
+  app.js
+
+  calendar/
+    state.js
+    dom.js
+    calendarRender.js
+    navigation.js
+    selection.js
+
+  notes/
+    notesStore.js
+    notesUI.js
+
 What to do next:
 
 1. Make Prev / Next work (state + re-render). ✅

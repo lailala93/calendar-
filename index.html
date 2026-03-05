@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <title>Calendar</title>
   </head>
   <body>
@@ -21,9 +21,11 @@
       <!-- Agenda items -->
       <div class="agenda" id="agenda">
         <h2 class="title-style">This is agenda</h2>
-        <p>Date of agenda items</p>
-        <p class="note__date currentDate"></p>
-        <ul id="agenda__list"></ul>
+        <div class="row-items">
+          <p>Date:</p>
+          <p class="note__date currentDate"></p>
+        </div>
+        <ul id="agenda__list" class="agenda__list"></ul>
         <div class="button-wrapper">
           <button type="button" class="button-wrapper--edit" id="editNote">
             Edit
@@ -53,7 +55,7 @@
         <h2 class="title-style" id="note--title">Notes:</h2>
 
         <p>You are editing:</p>
-        <p class="currentDate"></p>
+        <p class="note__date currentDate"></p>
 
         <span class="bnyu">
           <img src="transparant-bunny.18f91144.png" alt="" />
@@ -72,6 +74,6 @@
       </div>
       <!-- END notes -->
     </main>
-    <script type="module" src="/src/app.js"></script>
+    <script type="module" src="/src/index.js"></script>
   </body>
 </html>
