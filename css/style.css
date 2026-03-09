@@ -1,0 +1,528 @@
+.wrapper-title {
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 100%;
+  display: flex;
+  border-radius: 0.2rem;
+}
+
+.title-style {
+  width: 100%;
+  height: 51.3px;
+  padding-top: 1.3rem;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 900;
+  background: linear-gradient(135deg, rgb(1, 1, 50) 0%, rgba(0, 86, 190, 0.75) 100%);
+  background-clip: text;
+  color: transparent;
+}
+
+.currentDate {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: rgb(1, 1, 50);
+  font-weight: 500;
+  outline-offset: 0.2rem;
+  padding: 0.3rem 0.6rem;
+}
+
+.editing {
+  font-weight: 500;
+}
+
+/* 
+  Sizes
+
+  0-600px           = Phone                   --> =max-width media query
+  600px -900px      = Tablet + Portrait       --> =max-width media query
+  900px - 1200px    = Tablet + Landscape      --> =max-width media query
+
+  [1200px - 1800px] = Normal Styles apply here!
+
+  1800px            = Tablet + Portrait       --> =min-width media query
+
+  1em = 16px
+
+  $breakpoint argument choices: 
+  1. phone        0-600px
+  2. tab-port     600px -900px 
+  3. tab-land     900px - 1200px 
+  4. big-desktop  1800px
+
+  ORDER: 
+  1. BASE + typography. > 
+  2. GENERAL LAYOUT: header footer nav + grid > 
+  3. PAGE LAYOUT >
+  4. COMPONENTS
+
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 1.6rem;
+  background: rgba(0, 0, 0, 0.9);
+}
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("/images/Ex9MlTC-nature-wallpaper-wallpaper.jpg"), linear-gradient(#222, #f7f7fb) no-repeat center/cover;
+  z-index: -1;
+  filter: blur(1rem);
+}
+
+main {
+  max-height: 100vh;
+  display: grid;
+  width: clamp(28rem, 96vw, 140rem);
+  grid-template-columns: 1fr 3fr 1fr;
+  justify-content: center;
+  align-items: center;
+  place-content: center;
+  gap: 1rem;
+  margin: 0 auto;
+}
+@media only screen and (max-width: 56.25em) {
+  main {
+    grid-template-columns: 1fr;
+  }
+}
+
+.notes-closed {
+  grid-template-columns: 2fr 3fr;
+}
+
+.button-wrapper {
+  display: flex;
+  gap: 0.2rem;
+  margin-top: 1rem;
+}
+.button-wrapper button {
+  border-radius: 0.8rem;
+  padding: 0.5rem 1rem;
+  font-weight: 400;
+  color: white;
+  border: none;
+  animation: all 0.2s ease;
+}
+.button-wrapper button:hover {
+  filter: brightness(0.97);
+  cursor: pointer;
+  opacity: 0.9;
+  transform: scale(1.1);
+}
+.button-wrapper--save {
+  background: rgba(0, 86, 190, 0.75);
+}
+.button-wrapper--edit {
+  background: rgba(0, 98, 64, 0.75);
+}
+.button-wrapper--dlt {
+  background: rgba(180, 35, 55, 0.78);
+}
+
+#agendaActions {
+  display: none;
+}
+
+#agendaActions.is-visible {
+  display: flex;
+}
+
+header {
+  font-family: "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  margin: 0 auto;
+  width: clamp(28rem, 96vw, 140rem);
+  min-height: 25rem;
+  display: flex;
+  color: white;
+  background: url("/images/background1.jpg") no-repeat center/cover;
+  place-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  position: relative;
+  opacity: 1;
+}
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(0, 54, 162, 0.5), rgba(0, 54, 24, 0.8));
+  filter: saturate(0.9) contrast(1.05);
+  z-index: 0;
+}
+
+.month,
+.year {
+  display: inline-flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.month {
+  font-size: 6rem;
+  font-weight: 900;
+  color: #f7f7fb;
+  text-transform: uppercase;
+  text-shadow: 0.5rem 0.4rem 0.5rem #222;
+  position: relative;
+}
+.month::before {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.year {
+  font-size: 1.4rem;
+  opacity: 0.9;
+  font-weight: 800;
+  text-shadow: 0.5rem 0.4rem 0.5rem #222;
+}
+
+.prev,
+.next {
+  user-select: none;
+  cursor: pointer;
+  padding: 1rem 1.4rem;
+  border-radius: 1rem;
+  font-weight: 600;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.5), #f7f7fb);
+  color: #222;
+  position: absolute;
+  transform: translateY(100%);
+}
+
+.prev {
+  top: 25%;
+  left: 5%;
+}
+
+.next {
+  top: 25%;
+  right: 5%;
+}
+
+.prev:hover,
+.next:hover {
+  filter: brightness(0.45);
+}
+
+.current {
+  font-weight: 700;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.note {
+  display: flex;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.5);
+  height: 100%;
+  border-radius: 0.2rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 1rem;
+}
+.note--hidden {
+  display: none;
+}
+.note__close {
+  position: absolute;
+  top: 0;
+  right: 0.1rem;
+  animation: all 3s ease-in-out;
+}
+.note__close:hover {
+  cursor: pointer;
+  color: rgba(180, 35, 55, 0.78);
+  transform: scale(1.2);
+}
+.note__textarea {
+  display: flex;
+  width: 90%;
+  height: min(20rem, 50vh);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.8rem;
+  padding: 1rem;
+  font-size: 1.4rem;
+  color: grey;
+  resize: none;
+}
+.note__textarea:active, .note__textarea:focus {
+  outline: none;
+  border-color: rgba(0, 54, 162, 0.5);
+}
+
+.bnyu {
+  margin-bottom: 1rem;
+}
+.bnyu img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, rgba(0, 54, 162, 0.5) 0%, rgba(0, 54, 24, 0.8) 100%);
+  background-size: 200% auto;
+  animation: shine 5s linear infinite;
+}
+
+/* ========== Editing state (textarea) ========== */
+.note__textarea {
+  position: relative;
+  border-radius: 0.8rem;
+}
+
+/* base editing style */
+.note__textarea.is-editing {
+  color: rgba(180, 35, 55, 0.78);
+  font-weight: 700;
+  border: 0.1rem solid rgba(180, 35, 55, 0.65);
+  outline: none;
+}
+
+/* animated ring */
+.note__textarea.is-editing::after {
+  content: "";
+  position: absolute;
+  inset: -0.45rem;
+  border-radius: 1.1rem;
+  padding: 0.22rem;
+  background: conic-gradient(from 0deg, rgba(180, 35, 55, 0) 0 70%, rgba(180, 35, 55, 0.95) 70% 85%, rgba(180, 35, 55, 0) 85% 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: spin 1.4s linear infinite;
+  pointer-events: none;
+  filter: blur(0.2px);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* ========== Agenda panel ========== */
+.agenda {
+  border-radius: 0.2rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 1rem;
+}
+.agenda__list {
+  list-style: none;
+  width: 100%;
+  background-color: #f7f7fb;
+  border-radius: 0.2rem;
+  padding: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0.4rem;
+  box-shadow: 0 0.6rem 1.6rem rgba(0, 0, 0, 0.06);
+}
+.agenda__list--item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.2rem;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+}
+.agenda__list--item:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* Each note row */
+.agenda__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Actions container inside li */
+.agendaActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.agendaActions button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 0.5rem;
+  line-height: 1;
+}
+.agendaActions button:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+.agendaActions button:focus-visible {
+  outline: 0.2rem solid rgba(0, 0, 0, 0.2);
+  outline-offset: 0.2rem;
+}
+
+.dltNote i {
+  color: #222;
+}
+
+.editNote i {
+  color: rgba(0, 98, 64, 0.75);
+}
+
+.agenda__list.is-empty {
+  display: none;
+}
+
+.calendar {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 0.2rem;
+  box-shadow: 0 1.2rem 3rem rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* weekdays row */
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: linear-gradient(to bottom, rgba(0, 54, 162, 0.5) 0%, rgba(0, 54, 24, 0.8) 100%);
+  gap: 0.8rem;
+  width: 100%;
+  padding: 2rem 3rem;
+  border-bottom: 1px solid rgba(255, 245, 245, 0.1);
+  padding-block: clamp(0.8rem, 1.2vw, 1.6rem);
+  padding-inline: clamp(0.8rem, 1.5vw, 1.6rem);
+  min-height: clamp(4.2rem, 6vw, 6rem);
+  align-items: center;
+  gap: clamp(0.4rem, 1vw, 0.8rem);
+}
+@media only screen and (max-width: 37.5em) {
+  .weekdays {
+    padding-inline: 0.6rem;
+    padding-block: 0.8rem;
+    min-height: 3.6rem;
+    gap: 0.3rem;
+  }
+}
+
+.weekday {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.8rem;
+  letter-spacing: 0.04em;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  color: white;
+}
+@media only screen and (max-width: 37.5em) {
+  .weekday {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+}
+
+/* days grid */
+.rows {
+  display: grid;
+  gap: 0.2rem;
+  width: 100%;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.2rem;
+  padding: 1rem;
+}
+.row:not(:last-child) {
+  border-bottom: 1px solid rgba(58, 58, 58, 0.1);
+}
+@media only screen and (max-width: 37.5em) {
+  .row {
+    padding: 0.4rem;
+    gap: 0.15rem;
+  }
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 7rem;
+  padding: 1rem 0.5rem;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+@media only screen and (max-width: 37.5em) {
+  .cell {
+    min-height: 4.2rem;
+    padding: 0.4rem 0.2rem;
+    font-size: 1.2rem;
+  }
+}
+.cell:hover {
+  cursor: pointer;
+  background-color: rgba(0, 54, 24, 0.8);
+  color: white;
+  opacity: 0.8;
+  border-radius: 8px;
+}
+.cell--empty {
+  background: transparent;
+  border-color: rgba(0, 0, 0, 0.05);
+}
+.cell--muted {
+  opacity: 0.5;
+}
+.cell--muted:hover {
+  background: transparent;
+}
+.cell--today {
+  outline: 0.2rem solid rgba(0, 54, 162, 0.5);
+  color: #f7f7fb;
+  background: linear-gradient(135deg, rgba(0, 54, 162, 0.5) 0%, rgba(0, 54, 24, 0.8) 100%);
+  outline-offset: 0.2rem;
+  font-weight: 700;
+}
+.cell--selected {
+  background: #222;
+  color: #f7f7fb;
+}
+.cell--active {
+  outline: 0.2rem solid rgba(0, 98, 64, 0.75);
+  color: white;
+  background: linear-gradient(135deg, rgb(1, 1, 50) 0%, rgba(0, 86, 190, 0.75) 100%);
+  outline-offset: 0.2rem;
+  font-weight: 700;
+}
+.cell--active:hover {
+  background-color: rgba(180, 35, 55, 0.78);
+}
+
+/*# sourceMappingURL=style.css.map */

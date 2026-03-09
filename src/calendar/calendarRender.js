@@ -60,12 +60,6 @@ export function renderCalendar({
     }
   }
 
-  /* Not used 
-    // Get first day of month
-  year.innerText = viewYear;
-  month.innerText = d.toLocaleDateString("en-US", { month: "long" });
-  */
-
   function renderCell(monthIndex, yearNum) {
     let daysMonths = daysInMonth(monthIndex, yearNum);
     let counter = 1;

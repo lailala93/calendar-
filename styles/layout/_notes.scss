@@ -1,0 +1,110 @@
+@use "abstracts" as *;
+// START note (third)
+.note {
+  display: flex;
+  position: relative;
+  background-color: $bg-trans;
+  height: 100%;
+  border-radius: 0.2rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 1rem;
+
+  &--hidden {
+    display: none;
+  }
+
+  &__close {
+    position: absolute;
+    top: 0;
+    right: 0.1rem;
+    animation: all 3s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      color: $red;
+      transform: scale(1.2);
+    }
+  }
+
+  &__textarea {
+    display: flex;
+    width: 90%;
+    height: min(20rem, 50vh);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.8rem;
+    padding: 1rem;
+    font-size: 1.4rem;
+    color: grey;
+    resize: none;
+
+    &:active,
+    &:focus {
+      outline: none;
+      border-color: $blue;
+    }
+  }
+}
+
+.bnyu {
+  margin-bottom: 1rem;
+  img {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, $blue 0%, $green 100%);
+    background-size: 200% auto;
+    animation: shine 5s linear infinite;
+  }
+}
+
+/* ========== Editing state (textarea) ========== */
+.note__textarea {
+  position: relative;
+  border-radius: 0.8rem;
+}
+
+/* base editing style */
+.note__textarea.is-editing {
+  color: $red;
+  font-weight: 700;
+  border: 0.1rem solid rgba($red, 0.65);
+  outline: none;
+}
+
+/* animated ring */
+.note__textarea.is-editing::after {
+  content: "";
+  position: absolute;
+  inset: -0.45rem;
+  border-radius: 1.1rem;
+  padding: 0.22rem;
+
+  background: conic-gradient(
+    from 0deg,
+    rgba($red, 0) 0 70%,
+    rgba($red, 0.95) 70% 85%,
+    rgba($red, 0) 85% 100%
+  );
+
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  animation: spin 1.4s linear infinite;
+  pointer-events: none;
+  filter: blur(0.2px); // tiny smoothness
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

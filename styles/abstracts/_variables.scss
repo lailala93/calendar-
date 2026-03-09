@@ -4,7 +4,53 @@ $light-green: rgba(0, 98, 64, 0.75);
 $light-blue: rgba(0, 86, 190, 0.75);
 $red: rgba(180, 35, 55, 0.78);
 $orange: rgba(214, 118, 0, 0.78);
+$dark-blue: rgb(1, 1, 50);
 $black: #222;
 $white: #f7f7fb;
-$bg-note: rgba(236, 236, 236, 0.5);
-$width-screen: clamp(20rem, 92vw, 120rem);
+$bg-trans: rgba(255, 255, 255, 0.5);
+
+$linear-1: linear-gradient(135deg, $dark-blue 0%, $light-blue 100%);
+$width-screen: clamp(28rem, 96vw, 140rem);
+$bord-rad: 0.2rem;
+$ff-noto:
+  "Noto Sans",
+  system-ui,
+  -apple-system,
+  "Segoe UI",
+  Roboto,
+  Arial,
+  sans-serif;
+
+// Style for titles
+.wrapper-title {
+  background-color: $bg-trans;
+  width: 100%;
+  display: flex;
+
+  border-radius: 0.2rem;
+}
+
+.title-style {
+  width: 100%;
+  height: 51.3px;
+  padding-top: 1.3rem;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 900;
+  background: $linear-1;
+  background-clip: text;
+  color: transparent;
+}
+
+// This is the date inside note
+.currentDate {
+  background-color: $bg-trans;
+  color: $dark-blue;
+  font-weight: 500;
+  outline-offset: 0.2rem;
+  padding: 0.3rem 0.6rem;
+}
+
+.editing {
+  font-weight: 500;
+}

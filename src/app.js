@@ -32,6 +32,8 @@ export function initApp() {
       noteEl,
     } = getCalendarEls();
 
+    const main = document.querySelector("main");
+
     //  State that controls what month/year you're viewing
     const d = new Date();
     let viewYear = d.getFullYear();
@@ -71,6 +73,9 @@ export function initApp() {
     initSelection({
       noteEl,
       onSelect: (newKey) => {
+        main.classList.remove("notes-closed");
+        noteEl.classList.remove("note--hidden");
+
         selectedKey = newKey;
         draw();
         showNotes(selectedKey);

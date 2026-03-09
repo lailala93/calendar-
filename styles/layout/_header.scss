@@ -1,0 +1,90 @@
+@use "abstracts" as *;
+
+header {
+  font-family: $ff-noto;
+  margin: 0 auto;
+  width: $width-screen;
+  min-height: 25rem;
+  display: flex;
+  color: white;
+  background: url("/images/background1.jpg") no-repeat center/cover;
+  //   background-color: $bg-trans;
+  place-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  position: relative;
+  opacity: 1;
+
+  &::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+    background: linear-gradient($bg-trans, $blue, $green);
+    filter: saturate(0.9) contrast(1.05);
+    z-index: 0;
+  }
+}
+
+.month,
+.year {
+  display: inline-flex;
+  width: 100%;
+  justify-content: center;
+}
+.month {
+  font-size: 6rem;
+  font-weight: 900;
+  //   background-image: url("/images/Ex9MlTC-nature-wallpaper-wallpaper.jpg");
+  //   background-size: auto;
+  //   background-clip: text;
+  //   color: transparent;
+  color: $white;
+  text-transform: uppercase;
+  text-shadow: 0.5rem 0.4rem 0.5rem $black;
+  position: relative;
+
+  &::before {
+    position: absolute;
+    color: $bg-trans;
+  }
+}
+
+.year {
+  font-size: 1.4rem;
+  opacity: 0.9;
+  font-weight: 800;
+  text-shadow: 0.5rem 0.4rem 0.5rem $black;
+}
+.prev,
+.next {
+  user-select: none;
+  cursor: pointer;
+  padding: 1rem 1.4rem;
+  border-radius: 1rem;
+  font-weight: 600;
+  background: linear-gradient(to right, $bg-trans, $white);
+  color: $black;
+  // box-shadow: 0.3rem 0.1rem 0.5rem rgba(255, 254, 254, 0.393);
+  position: absolute;
+  transform: translateY(100%);
+}
+.prev {
+  top: 25%;
+  left: 5%;
+}
+.next {
+  top: 25%;
+  right: 5%;
+}
+.prev:hover,
+.next:hover {
+  filter: brightness(0.45);
+}
+// The date in the middle of header
+.current {
+  font-weight: 700;
+  font-size: 2rem;
+  text-align: center;
+}
