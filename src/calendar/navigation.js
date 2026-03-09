@@ -39,11 +39,12 @@ export function initNavigation({
     let { viewMonth, viewYear } = getView();
 
     viewMonth--;
+
     if (viewMonth < 0) {
       viewMonth = 12;
       viewYear--;
     }
     setView(viewMonth, viewYear);
-    onchange(viewMonth, viewYear);
+    onChange(viewMonth, viewYear);
   });
 }

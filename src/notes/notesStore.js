@@ -23,6 +23,8 @@ export function addNotes(key, text) {
   return items;
 }
 
+// i can remove the deleteLastNote and replace with delete right?
+
 export function deleteLastNote(key) {
   const items = getNotes(key);
   items.pop();
@@ -33,6 +35,25 @@ export function deleteLastNote(key) {
   }
   localStorage.setItem(key, JSON.stringify(items));
 
+  return items;
+}
+
+export function deleteNoteAt(key, index) {
+  const items = getNotes(key);
+  items.splice(index, 1);
+
+  if (items.length === 0) {
+    localStorage.removeItem(key);
+    return [];
+  }
+  localStorage.setItem(key, JSON.stringify(items));
+  return items;
+}
+
+export function updateNoteAt(key, index, newText) {
+  const items = getNotes(key);
+  items[index] = newText;
+  localStorage.setItem(key, JSON.stringify(items));
   return items;
 }
 

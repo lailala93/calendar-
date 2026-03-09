@@ -3,42 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <title>Calendar</title>
   </head>
   <body>
     <header>
-      <div class="prev" id="prevBtn">&lArr; Previous</div>
+      <div class="prev" id="prevBtn">
+        <i class="fa-solid fa-chevron-left"></i>
+      </div>
 
       <div class="current">
         <span class="month" id="month">Current Month</span>
         <span class="year" id="year">Current year</span>
       </div>
 
-      <div class="next" id="nextBtn">Next &rArr;</div>
+      <div class="next" id="nextBtn">
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
     </header>
     <main>
       <!-- Agenda items -->
       <div class="agenda" id="agenda">
-        <h2 class="title-style">This is agenda</h2>
-        <div class="row-items">
-          <p>Date:</p>
-          <p class="note__date currentDate"></p>
+        <div class="wrapper-title">
+          <h2 class="title-style">This is agenda</h2>
         </div>
+
+        <!-- <p class="editing">Date:</p>
+        <p class="note__date currentDate"></p> -->
+
         <ul id="agenda__list" class="agenda__list"></ul>
-        <div class="button-wrapper">
-          <button type="button" class="button-wrapper--edit" id="editNote">
-            Edit
-          </button>
-          <button
-            type="button"
-            button__wrapper--edit
-            class="button-wrapper--dlt"
-            id="dltNote"
-          >
-            Delete
-          </button>
-        </div>
       </div>
       <!-- end agenda -->
 
@@ -51,14 +54,17 @@
 
       <!-- NOTES -->
       <div id="note" class="note">
-        <span class="note__close" id="note__close">&#10006;</span>
-        <h2 class="title-style" id="note--title">Notes:</h2>
+        <span class="note__close" id="close-note">&#10006;</span>
+        <div class="wrapper-title">
+          <h2 class="title-style" id="note--title">Add a new note:</h2>
+        </div>
 
-        <p>You are editing:</p>
+        <p class="editing">Adding note to:</p>
+
         <p class="note__date currentDate"></p>
 
         <span class="bnyu">
-          <img src="transparant-bunny.18f91144.png" alt="" />
+          <img src="/images/transparant-bunny.18f91144.png" alt="" />
         </span>
         <textarea
           class="note__textarea"
