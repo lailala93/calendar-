@@ -7,7 +7,7 @@ header {
   min-height: 25rem;
   display: flex;
   color: white;
-  background: url("/images/background1.jpg") no-repeat center/cover;
+  background: url("../images/background1.jpg") no-repeat center/cover;
   //   background-color: $bg-trans;
   place-content: center;
   align-items: center;
@@ -36,10 +36,7 @@ header {
 .month {
   font-size: 6rem;
   font-weight: 900;
-  //   background-image: url("/images/Ex9MlTC-nature-wallpaper-wallpaper.jpg");
-  //   background-size: auto;
-  //   background-clip: text;
-  //   color: transparent;
+
   color: $white;
   text-transform: uppercase;
   text-shadow: 0.5rem 0.4rem 0.5rem $black;

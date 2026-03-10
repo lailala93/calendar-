@@ -1,8 +1,26 @@
 {
+  "main": "main.js",
+  "name": "calendar-app",
+  "version": "1.0.0",
+  "description": "A calendar app that takes/saves notes",
+  "author": "Laila Butrah",
+  "build": {
+    "appId": "com.laila.calendarapp",
+    "productName": "Calendar App",
+    "win": {
+      "target": "nsis"
+    }
+  },
   "scripts": {
-    "watch": "sass --load-path=styles styles/style.scss css/style.css -w"
+    "watch": "sass --load-path=styles styles/style.scss css/style.css -w",
+    "start": "electron .",
+    "build": "electron-builder"
   },
   "dependencies": {
     "sass": "^1.97.3"
+  },
+  "devDependencies": {
+    "electron": "^40.8.0",
+    "electron-builder": "^26.8.1"
   }
 }
