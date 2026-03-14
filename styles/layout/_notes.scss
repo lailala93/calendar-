@@ -2,14 +2,12 @@
 // START note (third)
 .note {
   display: flex;
-  position: relative;
-  background-color: $bg-trans;
-  height: 100%;
-  border-radius: 0.2rem;
   flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.2rem 1rem;
+  background-color: $white-card;
+  width: 100%;
+  max-height: 20rem;
+  position: relative;
+  gap: 0.5rem;
 
   &--hidden {
     display: none;
@@ -17,21 +15,24 @@
 
   &__close {
     position: absolute;
-    top: 0;
-    right: 0.1rem;
+    top: 0.6rem;
+    right: 0.8rem;
     animation: all 3s ease-in-out;
 
     &:hover {
       cursor: pointer;
-      color: $red;
+      color: $pastel-pink-2;
       transform: scale(1.2);
     }
   }
 
   &__textarea {
     display: flex;
-    width: 90%;
-    height: min(20rem, 50vh);
+    letter-spacing: 0.1rem;
+    color: $text-soft;
+    font-family: $ff-inter;
+    width: 100%;
+    height: 100%;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 0.8rem;
     padding: 1rem;
@@ -42,42 +43,50 @@
     &:active,
     &:focus {
       outline: none;
-      border-color: $blue;
+      border-color: $accent-blue;
     }
   }
 }
 
-.bnyu {
-  margin-bottom: 1rem;
-  img {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(to right, $blue 0%, $green 100%);
-    background-size: 200% auto;
-    animation: shine 5s linear infinite;
-  }
+/* ========== Editing state (textarea) ========== */
+.note__editor {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  border-radius: $bord-rad;
+  background-color: $white-soft;
 }
 
-/* ========== Editing state (textarea) ========== */
 .note__textarea {
-  position: relative;
+  flex: 1;
+}
+
+.note__add {
+  width: 4rem;
+  height: 3.5rem;
+  background: $pastel-lavender;
   border-radius: 0.8rem;
+  padding: 0.5rem 1rem;
+  font-family: $ff-inter;
+  color: $white;
+  border: none;
+  animation: all 0.2s ease;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.6;
+  }
 }
 
 /* base editing style */
 .note__textarea.is-editing {
-  color: $red;
-  font-weight: 700;
-  border: 0.1rem solid rgba($red, 0.65);
+  color: $accent-pink;
+  border: 0.1rem solid rgba($accent-pink, 0.65);
   outline: none;
 }
 
-/* animated ring */
+/* animated ring  | WHAT RING? I dont see it?? wat was i trying to do ??*/
 .note__textarea.is-editing::after {
   content: "";
   position: absolute;
@@ -87,9 +96,9 @@
 
   background: conic-gradient(
     from 0deg,
-    rgba($red, 0) 0 70%,
-    rgba($red, 0.95) 70% 85%,
-    rgba($red, 0) 85% 100%
+    rgba($accent-pink, 0) 0 70%,
+    rgba($accent-pink, 0.95) 70% 85%,
+    rgba($accent-pink, 0) 85% 100%
   );
 
   -webkit-mask:

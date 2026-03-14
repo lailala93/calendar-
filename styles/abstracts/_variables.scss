@@ -1,56 +1,61 @@
-$blue: rgba(0, 54, 162, 0.5);
-$green: rgba(0, 54, 24, 0.8);
-$light-green: rgba(0, 98, 64, 0.75);
-$light-blue: rgba(0, 86, 190, 0.75);
-$red: rgba(180, 35, 55, 0.78);
-$orange: rgba(214, 118, 0, 0.78);
-$dark-blue: rgb(1, 1, 50);
 $black: #222;
 $white: #f7f7fb;
 $bg-trans: rgba(255, 255, 255, 0.5);
 
-$linear-1: linear-gradient(135deg, $dark-blue 0%, $light-blue 100%);
-$width-screen: clamp(28rem, 96vw, 140rem);
-$bord-rad: 0.2rem;
-$ff-noto:
-  "Noto Sans",
-  system-ui,
-  -apple-system,
-  "Segoe UI",
-  Roboto,
-  Arial,
-  sans-serif;
+$pastel-pink: #f7d9e8;
+$pastel-pink-2: #efbfd8;
+$pastel-blue: #d8e8ff;
+$pastel-blue-2: #bfd8ff;
+$pastel-lavender: #e8ddff;
+$pastel-mint: #dff5ec;
+
+$white-soft: rgba(255, 255, 255, 0.4);
+$white-card: rgba(255, 255, 255, 0.1);
+
+$text-main: #493e54;
+$text-soft: #7f86a3;
+
+$border-soft: rgba(255, 255, 255, 0.35);
+$shadow-soft: 0 0.8rem 2.4rem rgba(114, 127, 168, 0.12);
+
+$accent-pink: #e79ac2;
+$accent-blue: #94baf8;
+
+// For active
+$linear-1: linear-gradient(135deg, $accent-pink 0%, $accent-blue 100%);
+// For current day
+$linear-2: linear-gradient(135deg, $pastel-pink 0%, $pastel-lavender 100%);
+
+// Practical
+$width-screen: clamp(32rem, 94vw, 138rem);
+$panel-radius: 2.2rem;
+$panel-gap: 1.8rem;
+
+$main-columns: 1fr 2fr;
+$column-gap: 1.8rem;
+$content-height: 56rem;
+
+$bord-rad: 2.8rem;
+$bord-rad-s: 0.8rem;
+
+// Text styles
+$ff-poppins: "Poppins", sans-serif;
+$ff-inter: "Inter", sans-serif;
 
 // Style for titles
 .wrapper-title {
   background-color: $bg-trans;
   width: 100%;
   display: flex;
-
-  border-radius: 0.2rem;
-}
-
-.title-style {
-  width: 100%;
-  height: 51.3px;
-  padding-top: 1.3rem;
-  font-size: 2rem;
-  text-align: center;
-  font-weight: 900;
-  background: $linear-1;
-  background-clip: text;
-  color: transparent;
-}
-
-// This is the date inside note
-.currentDate {
-  background-color: $bg-trans;
-  color: $dark-blue;
-  font-weight: 500;
-  outline-offset: 0.2rem;
-  padding: 0.3rem 0.6rem;
 }
 
 .editing {
   font-weight: 500;
+}
+// the edit/dlt buttons
+#agendaActions {
+  display: none;
+}
+#agendaActions.is-visible {
+  display: flex;
 }

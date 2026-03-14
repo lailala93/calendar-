@@ -1,0 +1,210 @@
+@use "abstracts" as *;
+// DARK COLORS
+
+$dark-bg-card: #262633;
+
+$dark-text-main: #f1f1f5;
+$dark-text-soft: #a8a8c2;
+
+$grey: rgba(157, 155, 162);
+$dark-border-soft: rgba(255, 255, 255, 0.08);
+
+$dark-pastel-lavender: #3b3554;
+$dark-shadow-soft: 0 0.8rem 2.4rem rgba(0, 0, 0, 0.45);
+
+// Base surfaces
+$dark-bg-main: #181821;
+$dark-bg-shell: #22222e;
+$dark-bg-panel: #2a2a38;
+
+// Interactive hover colors
+$dark-hover-cell: linear-gradient(135deg, #3b3554 0%, #2e3a56 100%);
+
+.app-shell {
+  position: relative;
+}
+.themeToggle {
+  display: inline-flex;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 100;
+
+  &__moon,
+  &__sun {
+    border: none;
+    background-color: transparent;
+
+    cursor: pointer;
+  }
+  &__moon i {
+    color: $text-main;
+  }
+
+  &__sun {
+    display: none;
+  }
+}
+
+.dark-mode .themeToggle__sun {
+  display: inline-flex;
+}
+
+.dark-mode .themeToggle__moon {
+  display: none;
+}
+.show {
+  display: inline-flex;
+}
+.hide {
+  display: none;
+}
+.dark-mode {
+  .themeToggle__moon i,
+  .themeToggle__sun i {
+    color: $grey;
+  }
+}
+
+.dark-mode {
+  background: $dark-bg-main;
+  color: $dark-text-main;
+
+  /* glass shell */
+  .app-shell {
+    background: $dark-bg-shell;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* header */
+  header {
+    border-bottom: 1px solid $dark-border-soft;
+  }
+  header,
+  .calendar,
+  .agenda,
+  .cell {
+    background-color: transparent;
+  }
+  .month {
+    color: $accent-pink;
+  }
+
+  .year {
+    color: $dark-text-soft;
+  }
+
+  /* nav buttons */
+  .prev,
+  .next {
+    background: $dark-bg-panel;
+    color: $accent-pink;
+  }
+
+  .prev:hover,
+  .next:hover {
+    background: $accent-pink;
+    color: white;
+  }
+
+  /* agenda panel */
+  .agenda {
+    box-shadow: $dark-shadow-soft;
+  }
+
+  .agenda__list {
+    background: $dark-bg-shell;
+  }
+
+  .agenda__list--item {
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.08);
+  }
+
+  .agenda__text {
+    color: $dark-text-main;
+  }
+
+  /* calendar container */
+  .calendar {
+    box-shadow: $dark-shadow-soft;
+  }
+
+  /* weekday row */
+  .weekdays {
+    background: $dark-bg-shell;
+  }
+
+  /* calendar cells */
+  .cell {
+    color: $dark-text-main;
+  }
+
+  .cell--muted {
+    color: $dark-text-soft;
+    opacity: 0.6;
+  }
+
+  .cell:hover {
+    background: rgba(255, 177, 218, 0.675);
+    color: white;
+    border: 1px solid $dark-bg-card;
+  }
+
+  .cell--today {
+    background: linear-gradient(
+      to right,
+      rgba(255, 177, 218, 0.675),
+      rgba(201, 222, 255, 0.538)
+    );
+  }
+  .cell--active {
+    background: rgba(231, 154, 194, 0.35);
+  }
+  .cell--active,
+  .cell--today,
+  .cell:hover {
+    border-color: $grey;
+    outline-color: $grey;
+  }
+
+  /* note editor */
+  textarea {
+    background: $dark-bg-shell;
+    color: $dark-text-main;
+    border: 1px solid $dark-border-soft;
+  }
+
+  .note__editor {
+    background: inherit;
+  }
+}
+
+body.dark-mode::after {
+  background:
+    url("../images/dark_image.png"),
+    linear-gradient(#0f0f16, #181821) no-repeat center/cover;
+
+  filter: blur(1rem);
+}
+.dark-mode .note {
+  background-color: inherit;
+}
+
+.dark-mode .title-style {
+  color: $dark-text-main;
+}
+
+.dark-mode .note__add {
+  background-color: $dark-pastel-lavender;
+}
+
+.dark-mode .note__date.currentDate {
+  background: rgba(231, 154, 194, 0.35);
+  color: $dark-text-main;
+  outline-color: $grey;
+}
+.dark-mode .note__textarea:active,
+.dark-mode .note__textarea:focus {
+  border: 1px solid $accent-pink;
+}

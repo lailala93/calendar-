@@ -8,21 +8,24 @@ const bunnyIcon = path.join(
 );
 const createWindow = () => {
   const win = new BrowserWindow({
-    minHeight: 1000,
+    width: 1180,
+    height: 860,
     minWidth: 1000,
+    minHeight: 760,
+    resizable: true,
+    backgroundColor: "#f7f7fb",
+
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
+      contextIsolation: true,
+      nodeIntegration: false,
     },
     title: "Calendar",
-    titleBarStyle: "customButtonsOnHover",
-    titleBarOverlay: {
-      color: "#3a3cbb",
-      symbolColor: "#544d6f",
-      height: 60,
-    },
+    // titleBarStyle: "hidden",
     icon: bunnyIcon,
   });
 
+  win.setMenuBarVisibility(false);
   win.loadFile("index.html");
 };
 
