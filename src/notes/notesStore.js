@@ -18,7 +18,10 @@ export function getNotes(key) {
 
 export function addNotes(key, text) {
   const items = getNotes(key);
-  items.push(text);
+  items.push({
+    text: text,
+    done: false,
+  });
   localStorage.setItem(key, JSON.stringify(items));
   return items;
 }
@@ -52,7 +55,16 @@ export function deleteNoteAt(key, index) {
 
 export function updateNoteAt(key, index, newText) {
   const items = getNotes(key);
-  items[index] = newText;
+
+  items[index].text = newText;
+
+  localStorage.setItem(key, JSON.stringify(items));
+  return items;
+}
+
+export function toggleNoteDone(key, index) {
+  const items = getNotes(key);
+  items[index].done = !items[index].done;
   localStorage.setItem(key, JSON.stringify(items));
   return items;
 }

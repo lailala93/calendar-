@@ -1,87 +1,94 @@
 @use "abstracts" as *;
 
 header {
-  font-family: $ff-noto;
-  margin: 0 auto;
-  width: $width-screen;
-  min-height: 25rem;
-  display: flex;
-  color: white;
-  background: url("../images/background1.jpg") no-repeat center/cover;
-  //   background-color: $bg-trans;
-  place-content: center;
+  font-family: $ff-poppins;
+  width: 100%;
+  min-height: 14rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.2rem;
+  background-color: $white-card;
+  margin-bottom: 0.8rem;
   position: relative;
-  opacity: 1;
-
-  &::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-    background: linear-gradient($bg-trans, $blue, $green);
-    filter: saturate(0.9) contrast(1.05);
-    z-index: 0;
-  }
+  border-bottom: 1px solid white;
+  position: relative; //for bunny
 }
 
 .month,
 .year {
-  display: inline-flex;
-  width: 100%;
-  justify-content: center;
 }
 .month {
+  color: $accent-pink;
   font-size: 6rem;
-  font-weight: 900;
-
-  color: $white;
+  font-weight: 450;
+  letter-spacing: -0.3rem;
   text-transform: uppercase;
-  text-shadow: 0.5rem 0.4rem 0.5rem $black;
-  position: relative;
 
-  &::before {
-    position: absolute;
-    color: $bg-trans;
+  @include respond(phone) {
+    font-size: 4rem;
   }
 }
 
 .year {
   font-size: 1.4rem;
   opacity: 0.9;
-  font-weight: 800;
-  text-shadow: 0.5rem 0.4rem 0.5rem $black;
+  color: $text-soft;
+  font-weight: 600;
 }
 .prev,
 .next {
-  user-select: none;
   cursor: pointer;
   padding: 1rem 1.4rem;
   border-radius: 1rem;
-  font-weight: 600;
-  background: linear-gradient(to right, $bg-trans, $white);
-  color: $black;
-  // box-shadow: 0.3rem 0.1rem 0.5rem rgba(255, 254, 254, 0.393);
-  position: absolute;
-  transform: translateY(100%);
+  font-weight: 900;
+  color: $accent-pink;
+  -webkit-app-region: no-drag;
 }
-.prev {
-  top: 25%;
-  left: 5%;
-}
+.prev,
 .next {
-  top: 25%;
-  right: 5%;
+  background: $white-soft; // linear-gradient(to right, $white-soft, $pastel-pink);
 }
+
 .prev:hover,
 .next:hover {
-  filter: brightness(0.45);
+  color: $accent-blue;
+  background-color: $accent-pink;
 }
 // The date in the middle of header
 .current {
   font-weight: 700;
   font-size: 2rem;
-  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @include respond(phone) {
+    margin-right: 5rem;
+  }
+}
+
+.bnyu {
+  img {
+    width: 15rem;
+    position: absolute;
+    left: 64%; // TODO: fix
+    bottom: 20%;
+    transform: translate(-50%);
+
+    @include respond(tab-land) {
+      left: 70%; // TODO: fix mobile
+    }
+    @include respond(tab-port) {
+      left: 75%; // TODO: fix mobile
+      width: 14rem;
+      bottom: 24%;
+    }
+    @include respond(phone) {
+      left: 66%; // TODO: fix mobile
+      width: 12rem;
+      bottom: 29%;
+    }
+  }
 }

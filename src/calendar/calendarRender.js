@@ -19,6 +19,7 @@ export function renderCalendar({
   monthEl,
   yearEl,
   selectedKey,
+  hasNotes,
 }) {
   const d = new Date();
 
@@ -39,8 +40,16 @@ export function renderCalendar({
   };
 
   const showDate = () => {
+    if (!selectedKey) return;
+    const [day, month, year] = selectedKey.split("-");
+    const date = new Date(year, month - 1, day);
+    const formatted = date.toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    });
     document.querySelectorAll(".currentDate").forEach((el) => {
-      el.innerText = selectedKey; // IF its onload -->  selectedKey ELSE IF on select CHANGE the date according to  cell;
+      el.innerText = formatted; // IF its onload -->  selectedKey ELSE IF on select CHANGE the date according to  cell;
     });
   };
 
@@ -91,7 +100,7 @@ export function renderCalendar({
 
     let nextMonthstart = 1;
 
-    const numRows = Math.ceil((daysMonths + firstDay) / 7);
+    const numRows = 6; // FORCE TO BE 6 FOR CSS. Math.ceil((daysMonths + firstDay) / 7);
     let beforeCounter = 0; // was 1
 
     for (let i = 0; i < numRows; i++) {
@@ -122,6 +131,12 @@ export function renderCalendar({
           cell.dataset.year = yearNum;
           cell.dataset.month = monthIndex;
           cell.dataset.day = counter;
+
+          if (hasNotes?.(counter, monthIndex, yearNum)) {
+            const dot = document.createElement("span");
+            dot.classList.add("note-dot");
+            cell.appendChild(dot);
+          }
 
           if (isToday(yearNum, monthIndex, counter)) {
             cell.classList.add("cell--today");

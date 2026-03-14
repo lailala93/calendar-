@@ -15,15 +15,12 @@ html {
 }
 
 body {
-  font-family:
-    system-ui,
-    -apple-system,
-    Segoe UI,
-    Roboto,
-    Arial,
-    sans-serif;
+  font-family: $ff-inter;
   font-size: 1.6rem;
-  background: rgba(black, 0.9);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &::after {
     content: "";
@@ -33,23 +30,31 @@ body {
     width: 100%;
     height: 100%;
     background:
-      url("../images/Ex9MlTC-nature-wallpaper-wallpaper.jpg"),
+      url("../images/pastelbg1.png"),
       linear-gradient($black, $white) no-repeat center/cover;
     z-index: -1;
     filter: blur(1rem);
+    transition: background 0.5s ease;
   }
+}
+.app-shell {
+  width: min(120rem, 95vw);
+  background-color: $white-soft;
+  border-radius: $bord-rad;
+  max-width: $width-screen;
+  margin: 0 auto;
+  border: 1px solid $pastel-pink;
+  padding: 1rem;
 }
 
 main {
-  max-height: 100vh;
   display: grid;
-  width: $width-screen;
-  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-columns: $main-columns;
+  gap: $column-gap;
+  height: $content-height;
+
   justify-content: center;
-  align-items: center;
-  place-content: center;
-  gap: 1rem;
-  margin: 0 auto;
+  align-items: stretch; // test center
 
   @include respond(tab-port) {
     grid-template-columns: 1fr;

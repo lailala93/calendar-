@@ -18,11 +18,11 @@ import {
   addNotes,
   deleteNoteAt,
   updateNoteAt,
+  toggleNoteDone,
 } from "./notesStore.js";
 
 export function initNotesUI({ getSelectedKey }) {
   const saveNote = document.getElementById("saveNote");
-  const dlt = document.getElementById("dltNote"); //TODO: is this unused?
   const note = document.getElementById("note");
   const agendaList = document.getElementById("agenda__list");
   const textareaEl = document.getElementById("noteTextarea");
@@ -70,6 +70,13 @@ export function initNotesUI({ getSelectedKey }) {
 
       const index = Number(li.dataset.index);
 
+      // Strike
+      if (e.target.classList.contains("agenda__text")) {
+        toggleNoteDone(key, index);
+        showNotes(key);
+        return;
+      }
+
       // DELETE clicked note
 
       if (e.target.closest(".dltNote")) {
@@ -91,7 +98,6 @@ export function initNotesUI({ getSelectedKey }) {
         textareaEl.value = oldText;
         textareaEl.focus();
         textareaEl.classList.add("is-editing");
-        //TODO: check --> Optional : open note panel
         note?.classList.add("note--open");
       }
     });
@@ -119,14 +125,18 @@ export function showNotes(selectedKey) {
 
   //   Render agenda list
   agendaList.innerHTML = "";
-  items.forEach((text, index) => {
+  items.forEach((item, index) => {
     const li = document.createElement("li");
     li.classList.add("agenda__list--item");
     li.dataset.index = index;
 
+    if (item.done) {
+      li.classList.add("strike");
+    }
+
     const label = document.createElement("span");
     label.classList.add("agenda__text");
-    label.textContent = text;
+    label.textContent = item.text;
 
     const dltBtn = document.createElement("button");
     dltBtn.type = "button";

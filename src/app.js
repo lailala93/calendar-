@@ -18,7 +18,8 @@ import { renderCalendar } from "./calendar/calendarRender.js";
 import { initNavigation } from "./calendar/navigation.js";
 import { initSelection } from "./calendar/selection.js";
 import { initNotesUI, showNotes } from "./notes/notesUI.js";
-
+import { getNotes } from "./notes/notesStore.js";
+import { themeToggle } from "./utility/themeToggle.js";
 export function initApp() {
   window.addEventListener("load", () => {
     //  Grab DOM elements ONCE (they only exist after load)
@@ -52,6 +53,14 @@ export function initApp() {
         monthEl: month,
         yearEl: year,
         selectedKey,
+        // TO add a dot WEN there is a note present within Calendar uwu
+        // Does it have a note?
+        hasNotes: (day, month, year) => {
+          const key = `${day}-${month + 1}-${year}`;
+          const notes = getNotes(key);
+          if (!notes) return;
+          return notes.length > 0;
+        },
       });
     };
 
@@ -66,6 +75,7 @@ export function initApp() {
       onChange: () => draw(),
     });
 
+    // TODO: fix the note dot. it  remains when i removed all items, only on refresh does it disappear
     initNotesUI({
       getSelectedKey: () => selectedKey,
     });
@@ -81,6 +91,7 @@ export function initApp() {
         showNotes(selectedKey);
       },
     });
+    themeToggle();
     draw();
     showNotes(selectedKey); // load note for default selectedKey on refresh
   });
