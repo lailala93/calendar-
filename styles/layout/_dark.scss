@@ -19,7 +19,9 @@ $dark-bg-panel: #2a2a38;
 
 // Interactive hover colors
 $dark-hover-cell: linear-gradient(135deg, #3b3554 0%, #2e3a56 100%);
-
+.dark-mode body {
+  background: #111;
+}
 .app-shell {
   position: relative;
 }
@@ -29,6 +31,13 @@ $dark-hover-cell: linear-gradient(135deg, #3b3554 0%, #2e3a56 100%);
   top: 1rem;
   right: 1rem;
   z-index: 100;
+  transform: translate(1);
+  transition: all 0.2s ease;
+
+  &:hover {
+    opacity: 0.5;
+    transform: translate(1.2); // TODO: doesnt work
+  }
 
   &__moon,
   &__sun {

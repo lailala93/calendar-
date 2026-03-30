@@ -5,11 +5,27 @@
   "description": "A calendar app that takes/saves notes",
   "author": "Laila Butrah",
   "build": {
-    "appId": "com.laila.calendarapp",
+    "appId": "com.bunny.calendar",
     "productName": "Calendar App",
+    "asar": true,
+    "compression": "maximum",
+    "npmRebuild": false,
+    "extraResources": [
+      {
+        "from": "images",
+        "to": "images"
+      }
+    ],
     "win": {
-      "target": "nsis"
-    }
+      "target": "nsis",
+      "icon": "../images/bunny.ico"
+    },
+    "files": [
+      "**/*",
+      "!node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!node_modules/*.d.ts"
+    ]
   },
   "scripts": {
     "watch": "sass --load-path=styles styles/style.scss css/style.css -w",

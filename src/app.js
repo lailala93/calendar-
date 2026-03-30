@@ -57,8 +57,10 @@ export function initApp() {
         // Does it have a note?
         hasNotes: (day, month, year) => {
           const key = `${day}-${month + 1}-${year}`;
+
           const notes = getNotes(key);
           if (!notes) return;
+
           return notes.length > 0;
         },
       });
@@ -78,6 +80,7 @@ export function initApp() {
     // TODO: fix the note dot. it  remains when i removed all items, only on refresh does it disappear
     initNotesUI({
       getSelectedKey: () => selectedKey,
+      onNotesCange: draw,
     });
 
     initSelection({
@@ -91,7 +94,7 @@ export function initApp() {
         showNotes(selectedKey);
       },
     });
-    themeToggle();
+    themeToggle(); // is this in the right place?
     draw();
     showNotes(selectedKey); // load note for default selectedKey on refresh
   });

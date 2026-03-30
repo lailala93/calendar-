@@ -21,7 +21,7 @@ import {
   toggleNoteDone,
 } from "./notesStore.js";
 
-export function initNotesUI({ getSelectedKey }) {
+export function initNotesUI({ getSelectedKey, onNotesCange }) {
   const saveNote = document.getElementById("saveNote");
   const note = document.getElementById("note");
   const agendaList = document.getElementById("agenda__list");
@@ -42,7 +42,7 @@ export function initNotesUI({ getSelectedKey }) {
       const key = getSelectedKey?.();
       if (!key) return;
 
-      const text = document.getElementById("noteTextarea")?.value ?? "";
+      const text = textareaEl.value ?? "";
       if (text.trim() === "") return;
 
       const editIndex = textareaEl.dataset.editIndex;
@@ -56,6 +56,7 @@ export function initNotesUI({ getSelectedKey }) {
       }
       textareaEl.value = "";
       showNotes(key);
+      onNotesCange?.(); // redraw calendar
     });
   }
 
@@ -74,14 +75,15 @@ export function initNotesUI({ getSelectedKey }) {
       if (e.target.classList.contains("agenda__text")) {
         toggleNoteDone(key, index);
         showNotes(key);
+        onNotesCange?.();
         return;
       }
 
       // DELETE clicked note
-
       if (e.target.closest(".dltNote")) {
         deleteNoteAt(key, index);
         showNotes(key);
+        onNotesCange?.();
 
         // If yoi were editing this item, canceledit mode
         if (textareaEl.dataset.editIndex === String(index)) {

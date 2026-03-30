@@ -151,3 +151,9 @@
 .agenda__list--item.strike .agenda__text::before {
   text-decoration: none;
 }
+#viewWeek {
+  // Right now te position is not good
+  position: absolute;
+  bottom: 50%;
+  right: 1rem;
+}
