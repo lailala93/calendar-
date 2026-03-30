@@ -145,6 +145,7 @@ header {
   font-weight: 900;
   color: #e79ac2;
   -webkit-app-region: no-drag;
+  z-index: 10;
 }
 
 .prev,

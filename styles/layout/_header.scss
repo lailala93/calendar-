@@ -42,6 +42,7 @@ header {
   font-weight: 900;
   color: $accent-pink;
   -webkit-app-region: no-drag;
+  z-index: 10;
 }
 .prev,
 .next {
