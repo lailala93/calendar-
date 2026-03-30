@@ -1,11 +1,7 @@
 const { app, BrowserWindow, nativeImage } = require("electron");
 
 const path = require("node:path");
-const bunnyIcon = path.join(
-  __dirname,
-  "images",
-  "transparant-bunny.18f91144.png",
-);
+const bunnyIcon = path.join(__dirname, "../images", "bunny.ico");
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 1180,

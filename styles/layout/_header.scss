@@ -11,7 +11,6 @@ header {
   margin-bottom: 0.8rem;
   position: relative;
   border-bottom: 1px solid white;
-  position: relative; //for bunny
 }
 
 .month,
@@ -54,41 +53,31 @@ header {
   color: $accent-blue;
   background-color: $accent-pink;
 }
+.top-row {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  flex-wrap: wrap;
+
+  img {
+    width: 15rem;
+
+    @include respond(phone) {
+      width: 10rem;
+    }
+  }
+}
 // The date in the middle of header
 .current {
-  font-weight: 700;
-  font-size: 2rem;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  transform: translateX(5rem);
 
-  @include respond(phone) {
-    margin-right: 5rem;
+  @include respond(tab-port) {
+    transform: translateX(2rem);
   }
-}
-
-.bnyu {
-  img {
-    width: 15rem;
-    position: absolute;
-    left: 64%; // TODO: fix
-    bottom: 20%;
-    transform: translate(-50%);
-
-    @include respond(tab-land) {
-      left: 70%; // TODO: fix mobile
-    }
-    @include respond(tab-port) {
-      left: 75%; // TODO: fix mobile
-      width: 14rem;
-      bottom: 24%;
-    }
-    @include respond(phone) {
-      left: 66%; // TODO: fix mobile
-      width: 12rem;
-      bottom: 29%;
-    }
+  @include respond(phone) {
+    transform: translateX(0);
   }
 }

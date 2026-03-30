@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <title>Calendar</title>
   </head>
+
   <body class="dark-mode">
     <div class="app-shell">
       <div class="themeToggle">
@@ -32,14 +33,14 @@
         </div>
 
         <div class="current">
-          <span class="month" id="month">Current Month </span>
-          <span class="bnyu">
+          <div class="top-row">
+            <span class="month" id="month">Current Month </span>
             <img
               src="./images/bunny_icon.png"
               alt="A bunny icon"
               id="bunnyIcon"
             />
-          </span>
+          </div>
           <span class="year" id="year">Current year</span>
         </div>
 
@@ -55,6 +56,10 @@
           <p class="note__date currentDate"></p>
 
           <h2 class="title-style">Agenda</h2>
+
+          <span class="weekContainer">
+            <button id="viewWeek">Week</button>
+          </span>
 
           <ul id="agenda__list" class="agenda__list"></ul>
           <!-- NOTES -->
@@ -89,6 +94,10 @@
         <!-- end calendar | start js NOTE -->
       </main>
     </div>
-    <script type="module" src="./src/index.js"></script>
+    <script type="module" src="./src/index.js">
+            if (localStorage.getItem("setTheme") === "dark") {
+        document.documentElement.classList.add("dark-mode");
+      }
+    </script>
   </body>
 </html>
